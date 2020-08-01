@@ -23,6 +23,7 @@ before_deploy:
 - cd ..
 - zip -r app.ipa Payload
 - popd
+
 deploy:
   provider: releases
   api_key:
