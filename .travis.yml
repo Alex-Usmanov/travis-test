@@ -1,34 +1,33 @@
-os: osx 
+os: osx
 osx_image: xcode11.5
-language: generic 
-before_script: 
- - brew update 
- - brew install --HEAD usbmuxd 
- - brew unlink usbmuxd 
- - brew link usbmuxd 
- - brew install --HEAD libimobiledevice 
- - brew install ideviceinstaller 
- - brew install ios-deploy 
- - git clone https://github.com/flutter/flutter.git -b beta --depth 1 
-script: 
- - flutter/bin/flutter build ios --debug --no-codesign
-cache: 
-  directories: 
-  - $HOME/.pub-cache
-before_deploy: 
-  - pushd build/ios/iphoneos 
-  - mkdir Payload 
-  - cd Payload 
-  - ln -s ../Runner.app 
-  - cd .. 
-  - zip -r app.ipa Payload 
-  - popd
-
+language: generic
+before_script:
+- brew update
+- brew install --HEAD usbmuxd
+- brew unlink usbmuxd
+- brew link usbmuxd
+- brew install --HEAD libimobiledevice
+- brew install ideviceinstaller
+- brew install ios-deploy
+- git clone https://github.com/flutter/flutter.git -b beta --depth 1
+script:
+- flutter/bin/flutter build ios --debug --no-codesign
+cache:
+  directories:
+  - "$HOME/.pub-cache"
+before_deploy:
+- pushd build/ios/iphoneos
+- mkdir Payload
+- cd Payload
+- ln -s ../Runner.app
+- cd ..
+- zip -r app.ipa Payload
+- popd
 deploy:
   provider: releases
   api_key:
-    secure: "EJozIFqu2xulS2DaFf0n/xyzmckO4Jd5OD17ch/8mBk6VGtG6WvPjxxDUIFACSK0gsrfuIxtHVs6bF9Hh8f6DFLzC0+sa7zyCqwMSQZyXN3vO54uw9aCl6nteYF9Lie4q7+OXzXe5ZQObZC+S4y73Ixbl8fGgnemJusIQHrb5AwWTtqMN9MIiQ7aU6vtGspW2fFK1OmiccYQVE3oQ42/hUbP7YVKeu/evLhZ2c92dAJ1/nsxSVCu2tgN+EEPaqi5t1I/punP45bawurutGMcs2lnZHC4xXUAHXl7cY6nXwQrVIgkaLg78daJemAdtiSN0rFV7NNTA/qoIb1Mp8+gd+BbEToFoY5YNvRAjs6StSykoz3iD9kxa45ph2QfmCs3f4jMVhZwf0QiQMlU6BwDpBH038FXRjVmXWn8DTQyVsOSooqTFrgrdXlmp54bHmSIyE2LQmQZfDpkZE1TSC6JB+zdE5nStQt9EAe/xABRmxIqJpKiv0/LnYu9vYTSeJz6oCbu12HYpFisikufnzFaYxVjWe0AecAO/3Ll5FxD5eWGlJYoygSdFQKKU1nPtPHaqTryeDA5/cr7fV/0tYMwAV7EI+U9vhMZWK6AsJ8qOMLcGEITJy9OsYiJLhaYbxp9OGeDPS3ARyuygbdDHtxGvzCwzKiRKbbd11H8PEdxE7I="
+    secure: GeE9ZZqdrqtVua1dHvsXK6ktel4o3C3QKX6+pcLvsEzIm1oTCZW/745hP9Nm4pk7zxI5ybmEy9WWVu77OlcRcd6SFEYeCEoANxfheX7+/Gaw8X/eerAPFcsuFXG6qeBgi1IkK21Qu/H5jEDMTsszdbpu7V3Rw+PWvhhYnESulD0ZCNGXXErtRdtfoabGEhYMFTBog0ke+jExToYytVB3XSvsosP7ndtTesiTG/dRUMN3IyG8PC0OU1ULc8UOT6GB6Hwb/uKy7XJHZ3WWmBZCNDSTRFsapAHu3q011AVVnJYPxYKsbxHiUDeJwbTuZtN14ggwtispyv8tVQb5INsHGKLOB0ENJCUrwkkBdrrFLBk3Fmiik4GAemPl4LnKA7IbB8HFJeMm1DMrs/T+u/UT7KTbjDaWA66AV/KRxIWM1qSgsluzwx1sKaNOAF59cht2Coem3RTuGW8/Ix1tfFbVZKkLc0RhCsiOJYcQuc58Sc2SjKgVWuzIA5MSR5lcevdVbnFjEzZFUe60WuebJp4pCS7142Y1g4CKoNWAENaaFsDcE3UuxERbS5WyzzSeRGlKbolSkHZtFa3TSTvOb7+uHq/xIQIfSHM8F/ZOZs4KIO+lAaP/NOgkdPkgljEsH7VGiaq+0zBC3KqqQY3tpQTQva5DcgBBT1XZs7kyoKaII7c=
   file: build/ios/iphoneos/app.ipa
-  skip_cleanup: true #important or your built app would be deleted
   on:
     repo: Alex-Usmanov/travis-test
+  skip_cleanup: 'true'
