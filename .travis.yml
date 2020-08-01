@@ -31,4 +31,4 @@ deploy:
   file: build/ios/iphoneos/app.ipa
   skip_cleanup: true #important or your built app would be deleted
   on:
-    repo: travis-test
+    repo: Alex-Usmanov/travis-test
